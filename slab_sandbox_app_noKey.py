@@ -144,9 +144,10 @@ with tabs[3]:
   <Rookie>{row['Rookie']}</Rookie>
 </Card>
 """, language="xml")
+
 with tabs[4]:
     st.markdown("### 🤖 SLAB Assistant – Ask Anything About SLAB Protocol™")
-    user_query = st.text_area("Paste one or a list of cards descriptions for AI SLAB breakdown:")
+    user_query = st.text_area("Paste one or more card descriptions for AI breakdown:")
 
     if st.button("Submit Query"):
         if user_query.strip():
@@ -155,35 +156,34 @@ with tabs[4]:
 
                 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-                # For OpenAI v1.0+, use this pattern
                 client = openai.Client(api_key=openai.api_key)
 
                 response = client.chat.completions.create(
-                    model="gpt-3.5-turbo",
+                    model="gpt-4",  # If you don't have GPT-4, change this to "gpt-3.5-turbo"
                     messages=[
                         {
                             "role": "system",
                             "content": """
-                        You are an expert in the SLAB Protocol™ trading card standard.
-                        Your task is to break down card descriptions into a structured table with the following SLAB fields:
-                        - Year
-                        - Player Name
-                        - Card Number
-                        - Card Set
-                        - Parallel
-                        - Grading Company
-                        - Grade
-                        - Limited
-                        - Short Print
-                        - Auto
-                        - Rookie
+                            You are an expert in the SLAB Protocol™ trading card standard.
+                            Break down card descriptions into the following fields:
+                            - Year (e.g., 2024)
+                            - Player Name (e.g., Shohei Ohtani)
+                            - Card Number (e.g., #S-2 or S-2)
+                            - Card Set (e.g., Topps Chrome, Panini Prizm)
+                            - Parallel (e.g., Silver Prizm, Rainbow Foil)
+                            - Grading Company (e.g., PSA, BGS, RAW)
+                            - Grade (e.g., 10, 9.5, or empty if not graded)
+                            - Limited (e.g., /99, #/99, or empty if not limited)
+                            - Short Print (e.g., SP, SSP, or empty if not short print)
+                            - Auto (e.g., Yes if autograph, empty otherwise)
+                            - Rookie (e.g., Yes if rookie card, empty otherwise)
 
-                        The user may provide one or multiple descriptions. For each description, output a row in JSON format.
-                        Return an **array of JSON objects**, where each object represents a card and includes **only the fields listed above**.
+                            Return only a valid JSON array of objects. Each object must have:
+                            {"Year": "", "Player Name": "", "Card Number": "", "Card Set": "", "Parallel": "", "Grading Company": "", "Grade": "", "Limited": "", "Short Print": "", "Auto": "", "Rookie": ""}
 
-                        If any field is unknown or not present in the description, set it as an empty string "".
-                        Do not include explanations or extra text. Return **only valid JSON**.
-                        """
+                            If any field is unknown or not present, leave it as an empty string "".
+                            DO NOT return explanations or additional text.
+                            """
                         },
                         {"role": "user", "content": user_query}
                     ],
