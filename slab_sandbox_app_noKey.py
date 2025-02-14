@@ -71,6 +71,11 @@ with tabs[1]:
         """
     )
 
+    search_query = st.text_input("Search Description")
+
+    st.markdown("#### Bulk Update Selected Rows")
+    col1, col2 = st.columns([1, 3])
+
     with col1:
         field_to_update = st.selectbox(
             "Field Drop Down",
@@ -115,7 +120,7 @@ with tabs[1]:
         df_slab.loc[selected_rows, "Select"] = False
         st.session_state.df_slab = df_slab.copy()
         st.rerun()
-    st.markdown("#### Bulk Update Selected Rows")
+
 
 with tabs[2]:
     st.dataframe(
