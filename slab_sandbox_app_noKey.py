@@ -131,97 +131,47 @@ with tabs[4]:
     if st.button("Submit Query"):
         if user_query.strip():
             try:
-import openai
-import streamlit as st
+                import json
 
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+                openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": """
-        You are an expert in the SLAB Protocol™ trading card standard.
-        Your task is to break down card descriptions into a structured table with the following SLAB fields:
-        - Year
-        - Player Name
-        - Card Number
-        - Card Set
-        - Parallel
-        - Grading Company
-        - Grade
-        - Limited
-        - Short Print
-        - Auto
-        - Rookie
+                response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": """
+                        You are an expert in the SLAB Protocol™ trading card standard.
+                        Your task is to break down card descriptions into a structured table with the following SLAB fields:
+                        - Year
+                        - Player Name
+                        - Card Number
+                        - Card Set
+                        - Parallel
+                        - Grading Company
+                        - Grade
+                        - Limited
+                        - Short Print
+                        - Auto
+                        - Rookie
 
-        The user may provide one or multiple descriptions. For each description, output a row in JSON format.
-        Return an **array of JSON objects**, where each object represents a card and includes **only the fields listed above**.
+                        The user may provide one or multiple descriptions. For each description, output a row in JSON format.
+                        Return an **array of JSON objects**, where each object represents a card and includes **only the fields listed above**.
 
-        If any field is unknown or not present in the description, set it as an empty string "".
-        Do not include explanations or extra text. Return **only valid JSON**.
-        """},
-        {"role": "user", "content": user_query}
-    ]
-)
-
-gpt_response = response['choices'][0]['message']['content'].strip()
-
-# Handle GPT sometimes wrapping in ```json ... ```
-if gpt_response.startswith("```json"):
-    gpt_response = gpt_response[7:-3].strip()
-
-import json
-try:
-    parsed_response = json.loads(gpt_response)
-
-    if isinstance(parsed_response, dict):
-        parsed_response = [parsed_response]
-
-    slab_columns = [
-        "Year", "Player Name", "Card Number", "Card Set", "Parallel",
-        "Grading Company", "Grade", "Limited", "Short Print", "Auto", "Rookie"
-    ]
-    normalized_data = [{col: item.get(col, "") for col in slab_columns} for item in parsed_response]
-
-    result_df = pd.DataFrame(normalized_data)
-    st.markdown("**Extracted SLAB Fields:**")
-    st.dataframe(result_df, use_container_width=True)
-
-except json.JSONDecodeError:
-    st.error("❌ Failed to parse AI response as JSON. GPT may have included text or formatting issues.")
-    st.markdown("Here’s the raw response:")
-    st.text(gpt_response)
-
-                            - Year
-                            - Player Name
-                            - Card Number
-                            - Card Set
-                            - Parallel
-                            - Grading Company
-                            - Grade
-                            - Limited
-                            - Short Print
-                            - Auto
-                            - Rookie
-
-                            The user may provide one or multiple descriptions. For each description, output a row in JSON format.
-                            Return an **array of JSON objects**, where each object represents a card and includes **only the fields listed above**.
-
-                            If any field is unknown or not present in the description, set it as an empty string "".
-                            Do not include explanations or extra text. Return **only valid JSON**. 
-                            """
+                        If any field is unknown or not present in the description, set it as an empty string "".
+                        Do not include explanations or extra text. Return **only valid JSON**.
+                        """
                         },
                         {"role": "user", "content": user_query}
-                    ]
+                    ],
                 )
 
-                gpt_response = response.choices[0].message.content.strip()
+                gpt_response = response["choices"][0]["message"]["content"].strip()
 
-                # Handle ```json ... ``` wrapping from GPT
+                # Handle GPT sometimes wrapping in ```json ... ```
                 if gpt_response.startswith("```json"):
                     gpt_response = gpt_response[7:-3].strip()
 
-                import json
                 try:
                     parsed_response = json.loads(gpt_response)
 
@@ -247,3 +197,4 @@ except json.JSONDecodeError:
                 st.error(f"❌ Error: {e}")
         else:
             st.warning("Please enter card descriptions before submitting.")
+
