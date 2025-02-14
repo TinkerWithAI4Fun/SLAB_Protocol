@@ -126,7 +126,7 @@ with tabs[3]:
 
 with tabs[4]:
     st.markdown("### 🤖 SLAB Assistant – Ask Anything About SLAB Protocol™")
-    user_query = st.text_area("Paste one or more card descriptions for AI breakdown:")
+    user_query = st.text_area("Paste one or a list of cards descriptions for AI SLAB breakdown:")
 
     if st.button("Submit Query"):
         if user_query.strip():
