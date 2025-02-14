@@ -56,7 +56,7 @@ parallels = [
 st.title("SLAB Protocol™ AI Builder – Sandbox Demo")
 st.markdown("#### A trading card standard powered by AI")
 
-tabs = st.tabs(["📄 Load Data from File", "📝 Edit SLAB Fields", "📊 SLAB Table Preview", "📄 SLAB XML Preview", "🤖 SLAB Assistant"])
+tabs = st.tabs(["🔄 Load Data from File", "📝 Edit AI Generated Fields", "📊 Preview SLAB Generated Data", "📄 Preview SLAB Generated XML", "🔍 SLAB Insights"])
 
 with tabs[0]:
     st.markdown("### Processing Selected SLAB_Data.xlsx through Engine")
