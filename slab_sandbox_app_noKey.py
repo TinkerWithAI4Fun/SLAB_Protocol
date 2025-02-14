@@ -135,7 +135,10 @@ with tabs[4]:
 
                 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-                response = openai.ChatCompletion.create(
+                # For OpenAI v1.0+, use this pattern
+                client = openai.Client(api_key=openai.api_key)
+
+                response = client.chat.completions.create(
                     model="gpt-3.5-turbo",
                     messages=[
                         {
@@ -166,7 +169,7 @@ with tabs[4]:
                     ],
                 )
 
-                gpt_response = response["choices"][0]["message"]["content"].strip()
+                gpt_response = response.choices[0].message.content.strip()
 
                 # Handle GPT sometimes wrapping in ```json ... ```
                 if gpt_response.startswith("```json"):
@@ -197,4 +200,3 @@ with tabs[4]:
                 st.error(f"❌ Error: {e}")
         else:
             st.warning("Please enter card descriptions before submitting.")
-
