@@ -120,20 +120,13 @@ with tabs[1]:
         df_slab.loc[selected_rows, "Select"] = False
         st.session_state.df_slab = df_slab.copy()
         st.rerun()
-        
+
 with tabs[2]:
-    st.markdown(
-        """
-        ### \ud83d\udcca Preview SLAB Generated Data
-        This page displays the **fully structured card data** after AI extraction and any manual edits.  
-        You can review the updated data here before exporting it to other formats.
-        """
-    )
+    st.markdown("### 📊 Preview SLAB Generated Data")
     st.dataframe(
         st.session_state.df_slab.drop(columns=["Select"]),
         use_container_width=True
     )
-
 with tabs[3]:
     for _, row in st.session_state.df_slab.iterrows():
         st.code(f"""
