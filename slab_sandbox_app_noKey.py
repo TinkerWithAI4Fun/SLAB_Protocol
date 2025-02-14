@@ -5,7 +5,7 @@ import openai
 st.set_page_config(layout="wide")
 
 if "df_slab" not in st.session_state:
-    file_path = "C:/Python/SLAB_Protocol/SLAB_Data.xlsx"
+    file_path = "SLAB_Data.xlsx"
     df_slab = pd.read_excel(file_path)
 
     # Clean and standardize the data
