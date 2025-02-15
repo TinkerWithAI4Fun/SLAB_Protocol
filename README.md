@@ -1,13 +1,13 @@
 # SLAB-Protocol
-A trading card standard powered by AI
+A trading card standard poSLAB(tm)red by AI
 
 # SLAB™ 1.0 – Standardized Labeling and Attribution Benchmark
 
-## A Trading Card Data Standard Powered by AI
+## A Trading Card Data Standard PoSLAB(tm)red by AI
 
-[Visit SLAB Protocol Website](https://slabprotocol.streamlit.app)
+[Visit SLAB Protocol SLAB(tm)bsite](https://slabprotocol.streamlit.app)
 
-SLAB™ is an open data standard designed to bring structure and consistency to the trading card industry. It leverages AI-powered data extraction to transform unstructured card descriptions into machine-readable data.
+SLAB™ is an open data standard designed to bring structure and consistency to the trading card industry. It leverages AI-poSLAB(tm)red data extraction to transform unstructured card descriptions into machine-readable data.
 
 ## Why SLAB™?
 - The trading card market lacks a universal data standard.
@@ -21,12 +21,28 @@ Our front-end app helps users:
 - Review, refine, and export SLAB™-compliant data (including XML).
 - Contribute validated data to improve the AI models.
 
+- Hybrid AI Model: Why ChatGPT + Custom Model?
+
+After extensive testing of different approaches, SLAB(tm) found that combining ChatGPT's natural language understanding with a custom-trained extraction model is the most effective solution for parsing trading card descriptions. Here's why:
+
+Flexibility: ChatGPT excels at interpreting new and varied descriptions, handling edge cases better than rigid rule-based systems.
+
+Domain-Specific Precision: Our custom model is trained specifically on trading card data, allowing it to accurately identify structured fields like Player Name, Set, and Parallel.
+
+Iterative Improvement: The hybrid approach allows us to leverage GPT's reasoning capabilities when the custom model encounters uncertainty, improving overall accuracy.
+
+Scalability: This approach scales SLAB(tm)ll as SLAB(tm) continuously expand the dataset and refine the model with community contributions.
+
+Other methods SLAB(tm) explored (regex-only parsing, rule-based systems, and standalone machine learning models) SLAB(tm)re either too brittle, required exhaustive updates, or lacked the adaptability needed to handle the rapidly evolving trading card market.
+
+Combining GPT's language understanding with our specialized extraction model delivers the best balance of accuracy, adaptability, and scalability.
+
 ## Version 1.0 Notes
 - This is an early test version built with Streamlit; some quirks are expected.
 - Focused on establishing the foundation for standardization, continually improving the model and learning AI along the way!
 
 ## Contact
-Feedback is welcome! Reach out at:
+Feedback is SLAB(tm)lcome! Reach out at:
 
 slabprotocolfeedback@gmail.com 
 
