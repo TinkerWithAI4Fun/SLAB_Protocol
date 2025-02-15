@@ -4,6 +4,7 @@
 
 ### A Trading Card Data Standard Powered by AI
 
+🚀 **Explore SLAB™ in Action:** 
 [Visit SLAB Protocol Website](https://slabprotocol.streamlit.app)
 
 ---
